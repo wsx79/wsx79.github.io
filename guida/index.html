@@ -312,6 +312,31 @@ const SECTIONS = [
     }
   },
   {
+    id: 'share',
+    title: { it: 'Condividere un WOD', en: 'Sharing a WOD', es: 'Compartir un WOD' },
+    intro: {
+      it: 'Un WOD si passa con un link o con un QR: chi lo riceve lo apre in IRON WOD, lo controlla nell\'editor e lo salva tra i suoi. Niente account e niente server: il WOD viaggia dentro il link.',
+      en: 'A WOD travels as a link or a QR code: whoever gets it opens it in IRON WOD, reviews it in the editor and saves it as their own. No account and no server: the WOD lives inside the link.',
+      es: 'Un WOD se pasa con un enlace o un QR: quien lo recibe lo abre en IRON WOD, lo revisa en el editor y lo guarda entre los suyos. Sin cuenta y sin servidor: el WOD viaja dentro del enlace.'
+    },
+    shots: [['share-qr', { it: 'QR del WOD', en: 'WOD QR code', es: 'QR del WOD' }], ['share-link', { it: 'Il link aperto senza app', en: 'The link without the app', es: 'El enlace sin la app' }], ['share-session', { it: 'Dal dettaglio sessione', en: 'From a session', es: 'Desde una sesión' }]],
+    items: [
+      { t: { it: 'Condividi WOD', en: 'Share WOD', es: 'Compartir WOD' },
+        d: { it: 'Nel dettaglio di un WOD tocca <b>Condividi WOD</b> e scegli WhatsApp, mail o un\'altra app: parte un messaggio con il nome del WOD e il link.', en: 'In a WOD\'s detail tap <b>Share WOD</b> and pick WhatsApp, email or another app: it sends a message with the WOD name and the link.', es: 'En el detalle de un WOD toca <b>Compartir WOD</b> y elige WhatsApp, correo u otra app: se envía un mensaje con el nombre del WOD y el enlace.' } },
+      { t: { it: 'Mostra QR', en: 'Show QR code', es: 'Mostrar QR' },
+        d: { it: 'Al box, senza scambiarsi numeri: <b>Mostra QR</b> e l\'altro lo inquadra con la fotocamera normale del telefono. Si apre direttamente IRON WOD con il WOD pronto.', en: 'At the box, without swapping numbers: <b>Show QR code</b> and the other person scans it with their phone\'s normal camera. IRON WOD opens straight away with the WOD ready.', es: 'En el box, sin intercambiar números: <b>Mostrar QR</b> y la otra persona lo escanea con la cámara normal del móvil. IRON WOD se abre directamente con el WOD listo.' } },
+      { t: { it: 'Aprire un WOD ricevuto', en: 'Opening a WOD you received', es: 'Abrir un WOD recibido' },
+        d: { it: 'Toccando il link si apre l\'editor con il WOD già compilato: intervalli, round, tempi, esercizi e carichi. Controlla, cambia quello che vuoi e salva. Chi non ha l\'app vede l\'anteprima del WOD nel browser e il link a Google Play.', en: 'Tapping the link opens the editor with the WOD already filled in: intervals, rounds, times, exercises and loads. Review it, change what you like and save. Without the app, the browser shows a preview of the WOD and the Google Play link.', es: 'Al tocar el enlace se abre el editor con el WOD ya completo: intervalos, rondas, tiempos, ejercicios y cargas. Revísalo, cambia lo que quieras y guarda. Sin la app, el navegador muestra una vista previa del WOD y el enlace a Google Play.' } },
+      { t: { it: 'Dalle sessioni', en: 'From your sessions', es: 'Desde tus sesiones' },
+        d: { it: 'Nel dettaglio di una sessione, oltre a <b>Condividi risultato</b>, ci sono <b>Condividi WOD</b> e <b>Mostra QR</b>: passano il WOD fatto quel giorno, anche se nel frattempo l\'hai cancellato dalla libreria.', en: 'In a session\'s detail, next to <b>Share result</b>, there are <b>Share WOD</b> and <b>Show QR code</b>: they pass on the WOD you did that day, even if you have since deleted it from the library.', es: 'En el detalle de una sesión, además de <b>Compartir resultado</b>, están <b>Compartir WOD</b> y <b>Mostrar QR</b>: pasan el WOD que hiciste ese día, aunque lo hayas borrado de la biblioteca.' } }
+    ],
+    tip: {
+      it: 'Gli esercizi personalizzati arrivano come testo libero, perché sull\'altro telefono non esistono: chi riceve il WOD può collegarli al catalogo dall\'editor.',
+      en: 'Custom exercises arrive as free text, since they don\'t exist on the other phone: the receiver can link them to the catalog from the editor.',
+      es: 'Los ejercicios personalizados llegan como texto libre, porque en el otro móvil no existen: quien recibe el WOD puede vincularlos al catálogo desde el editor.'
+    }
+  },
+  {
     id: 'scan',
     title: { it: 'Scansione della lavagna', en: 'Whiteboard scanning', es: 'Escaneo de la pizarra' },
     intro: {
@@ -417,7 +442,7 @@ const SECTIONS = [
       { t: { it: 'Inserimento manuale', en: 'Manual entry', es: 'Entrada manual' },
         d: { it: 'Hai fatto il WOD senza il telefono? Inseriscilo dopo, con data, ora, durata, time cap e la struttura costruita con lo stesso editor dei WOD.', en: 'Did the WOD without your phone? Add it afterwards, with date, time, duration, time cap and the structure built with the same WOD editor.', es: '¿Hiciste el WOD sin el teléfono? Añádelo después, con fecha, hora, duración, time cap y la estructura hecha con el mismo editor de WOD.' } },
       { t: { it: 'Condivisione', en: 'Sharing', es: 'Compartir' },
-        d: { it: 'Condividi una sessione o un elenco filtrato di risultati.', en: 'Share a session or a filtered list of results.', es: 'Comparte una sesión o una lista filtrada de resultados.' } }
+        d: { it: 'Condividi una sessione o un elenco filtrato di risultati. Dal dettaglio di una sessione puoi passare anche il WOD stesso, con un link o un QR (vedi <a href="#s-share">Condividere un WOD</a>).', en: 'Share a session or a filtered list of results. From a session\'s detail you can also pass on the WOD itself, as a link or a QR code (see <a href="#s-share">Sharing a WOD</a>).', es: 'Comparte una sesión o una lista filtrada de resultados. Desde el detalle de una sesión también puedes pasar el WOD, con un enlace o un QR (ver <a href="#s-share">Compartir un WOD</a>).' } }
     ]
   },
   {
