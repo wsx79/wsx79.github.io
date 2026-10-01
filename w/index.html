@@ -159,6 +159,36 @@
     return "";
   }
 
+  var TYPE_CODES = { A: "AMRAP", E: "EMOM", T: "TABATA", I: "INTERVALS", M: "MANUAL_INTERVALS", F: "FOR_TIME", C: "COUNTDOWN", U: "COUNT_UP" };
+
+  // Format v2 (positional arrays, see WodShareCodec.encode in the app) -> the v1 object shape.
+  function fromV2(root, names) {
+    function text(v) { return typeof v === "string" ? v : ""; }
+    function num(v) { return typeof v === "number" && v > 0 ? v : null; }
+    return {
+      v: 2, n: text(root[1]), t: TYPE_CODES[root[2]] || "FOR_TIME", no: text(root[5]),
+      b: (root[6] || []).map(function (b) {
+        var flags = b[4] || 0;
+        return {
+          t: TYPE_CODES[b[0]] || "FOR_TIME", r: num(b[1]), d: num(b[2]), i: num(b[3]),
+          rest: flags & 2, wait: flags & 4, tc: num(b[6]), ra: num(b[7]), w: num(b[8]), rs: num(b[9]),
+          no: text(b[10]), l: text(b[11]),
+          e: (b[5] || []).map(function (e) {
+            var rare = (e[3] && typeof e[3] === "object") ? e[3] : {};
+            var f = {};
+            text(e[1]).split("~").forEach(function (part) { if (part.length > 1) f[part[0]] = part.slice(1); });
+            function field(letter) { return f[letter] || rare[letter] || ""; }
+            var name = typeof e[0] === "number" ? (names[String(e[0])] || "#" + e[0]) : text(e[0]);
+            return {
+              n: name, r: field("r"), ca: field("c"), m: field("m"), kg: field("k"),
+              ts: field("t") ? Number(field("t")) : null, rf: rare.F || "", rm: rare.M || "", no: text(e[2])
+            };
+          })
+        };
+      })
+    };
+  }
+
   function render(wod, code) {
     header(t.kicker);
     app.appendChild(el("h1", null, wod.n || "WOD"));
@@ -225,6 +255,11 @@
     return;
   }
   decode(code).then(function (wod) {
+    if (Array.isArray(wod)) {
+      if (wod[0] !== 2) { fail(t.old); return; }
+      return fetch("names.json").then(function (r) { return r.json(); }).catch(function () { return {}; })
+        .then(function (names) { render(fromV2(wod, names), code); });
+    }
     if (!wod || typeof wod.v !== "number") throw new Error("not a WOD");
     if (wod.v > 1) { fail(t.old); return; }
     render(wod, code);
