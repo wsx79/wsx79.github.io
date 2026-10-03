@@ -48,6 +48,7 @@
   .btn.primary { background: var(--orange); border-color: var(--orange); color: #000; }
   .block { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px 16px; margin: 0 0 12px; }
   .block.rest { border-color: rgba(59, 130, 246, .5); }
+  .slot { color: var(--orange-soft); font-weight: 800; }
   .part { display: flex; align-items: center; gap: 10px; margin: 18px 0 14px; }
   .part::before, .part::after { content: ""; flex: 1; height: 2px; background: var(--orange); opacity: .5; }
   .part span { border: 1.5px solid var(--orange); border-radius: 12px; padding: 6px 14px; font-weight: 900; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
@@ -156,6 +157,12 @@
     if (e.ts) parts.push(time(e.ts));
     return parts.join(" · ");
   }
+  // "Min 1" for the classic minute, else the interval's time window ("0:00–3:00").
+  function slot(index, interval) {
+    if (interval === 60) return "Min " + (index + 1);
+    function clock(sec) { return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0"); }
+    return clock(index * interval) + "–" + clock((index + 1) * interval);
+  }
   function load(e) {
     if (e.kg) return "@ " + e.kg + " kg";
     if (e.rm || e.rf) return "@ " + [e.rm, e.rf].filter(Boolean).join("/");
@@ -174,7 +181,7 @@
         var flags = b[4] || 0;
         return {
           t: TYPE_CODES[b[0]] || "FOR_TIME", r: num(b[1]), d: num(b[2]), i: num(b[3]),
-          rest: flags & 2, wait: flags & 4, tc: num(b[6]), ra: num(b[7]), w: num(b[8]), rs: num(b[9]),
+          rot: flags & 1, rest: flags & 2, wait: flags & 4, tc: num(b[6]), ra: num(b[7]), w: num(b[8]), rs: num(b[9]),
           no: text(b[10]), l: text(b[11]),
           e: (b[5] || []).map(function (e) {
             var rare = (e[3] && typeof e[3] === "object") ? e[3] : {};
@@ -228,7 +235,9 @@
         head.appendChild(el("span", "type", TYPES[b.t] || b.t || ""));
         var meta = [];
         if (b.t === "EMOM" && b.i && b.i !== 60) meta.push(t.every + " " + time(b.i));
-        if (b.r) meta.push(t.rounds(b.r));
+        // Rotating EMOM: one exercise per interval, in turn - "5 × 2" rounds through the list.
+        var rotating = b.t === "EMOM" && b.rot && (b.e || []).length > 1;
+        if (b.r) meta.push(rotating ? b.r + " × " + b.e.length : t.rounds(b.r));
         if (b.d && b.t !== "FOR_TIME") meta.push(time(b.d));
         if (b.w) meta.push(time(b.w) + " " + t.work);
         if (b.rs) meta.push(time(b.rs) + " " + t.off);
@@ -239,8 +248,9 @@
       card.appendChild(head);
       if (b.no) card.appendChild(el("p", "notes", b.no));
       var list = el("ul");
-      (b.e || []).forEach(function (e) {
+      (b.e || []).forEach(function (e, ei) {
         var item = el("li");
+        if (rotating) item.appendChild(el("span", "slot", slot(ei, b.i || 60) + " · "));
         var d = dose(e);
         if (d) { item.appendChild(el("span", "dose", d)); item.appendChild(document.createTextNode(" ")); }
         item.appendChild(document.createTextNode(e.n || ""));
