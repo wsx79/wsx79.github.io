@@ -154,8 +154,8 @@
     return parts.join(" · ");
   }
   function load(e) {
-    if (e.rm || e.rf) return "@ " + [e.rm, e.rf].filter(Boolean).join("/");
     if (e.kg) return "@ " + e.kg + " kg";
+    if (e.rm || e.rf) return "@ " + [e.rm, e.rf].filter(Boolean).join("/");
     return "";
   }
 
