@@ -48,6 +48,9 @@
   .btn.primary { background: var(--orange); border-color: var(--orange); color: #000; }
   .block { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px 16px; margin: 0 0 12px; }
   .block.rest { border-color: rgba(59, 130, 246, .5); }
+  .part { display: flex; align-items: center; gap: 10px; margin: 18px 0 14px; }
+  .part::before, .part::after { content: ""; flex: 1; height: 2px; background: var(--orange); opacity: .5; }
+  .part span { border: 1.5px solid var(--orange); border-radius: 12px; padding: 6px 14px; font-weight: 900; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
   .block-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 0 0 8px; }
   .type { font-weight: 900; color: var(--orange-soft); letter-spacing: .04em; }
   .block.rest .type { color: var(--blue); }
@@ -78,7 +81,7 @@
       kicker: "WOD condiviso", lead: "Ti hanno mandato questo WOD. Aprilo in IRON WOD per controllarlo, salvarlo e farlo partire col timer.",
       open: "Apri in IRON WOD", get: "Scarica IRON WOD da Google Play",
       rounds: function (n) { return n === 1 ? "1 round" : n + " round"; },
-      every: "ogni", cap: "time cap", rest: "Recupero", restAfter: "recupero dopo", work: "lavoro", off: "pausa", wait: "partenza manuale",
+      every: "ogni", cap: "time cap", rest: "Recupero", restAfter: "recupero dopo", work: "lavoro", off: "pausa", part: "Parte",
       bad: "Questo link non contiene un WOD leggibile. Chiedi a chi te l'ha mandato di condividerlo di nuovo dall'app.",
       old: "Questo WOD è stato creato con una versione più recente di IRON WOD: aprilo nell'app aggiornata.",
       guide: "Guida a IRON WOD"
@@ -87,7 +90,7 @@
       kicker: "Shared WOD", lead: "Someone sent you this WOD. Open it in IRON WOD to review it, save it and start it on the timer.",
       open: "Open in IRON WOD", get: "Get IRON WOD on Google Play",
       rounds: function (n) { return n === 1 ? "1 round" : n + " rounds"; },
-      every: "every", cap: "time cap", rest: "Rest", restAfter: "rest after", work: "work", off: "rest", wait: "manual start",
+      every: "every", cap: "time cap", rest: "Rest", restAfter: "rest after", work: "work", off: "rest", part: "Part",
       bad: "This link doesn't contain a readable WOD. Ask the sender to share it again from the app.",
       old: "This WOD was made with a newer IRON WOD: open it in the updated app.",
       guide: "IRON WOD guide"
@@ -96,7 +99,7 @@
       kicker: "WOD compartido", lead: "Te han enviado este WOD. Ábrelo en IRON WOD para revisarlo, guardarlo e iniciarlo con el temporizador.",
       open: "Abrir en IRON WOD", get: "Descargar IRON WOD en Google Play",
       rounds: function (n) { return n === 1 ? "1 ronda" : n + " rondas"; },
-      every: "cada", cap: "time cap", rest: "Descanso", restAfter: "descanso después", work: "trabajo", off: "descanso", wait: "inicio manual",
+      every: "cada", cap: "time cap", rest: "Descanso", restAfter: "descanso después", work: "trabajo", off: "descanso", part: "Parte",
       bad: "Este enlace no contiene un WOD legible. Pide a quien te lo envió que lo comparta de nuevo desde la app.",
       old: "Este WOD se creó con una versión más reciente de IRON WOD: ábrelo en la app actualizada.",
       guide: "Guía de IRON WOD"
@@ -206,7 +209,15 @@
 
     if (wod.no) app.appendChild(el("p", "notes", wod.no));
 
-    (wod.b || []).forEach(function (b) {
+    // A WOD split into parts (the athlete taps to start the next one): "PARTE N" between them, as in the app.
+    var part = 1;
+    (wod.b || []).forEach(function (b, index) {
+      if (index > 0 && b.wait && !b.rest) {
+        part++;
+        var divider = el("div", "part");
+        divider.appendChild(el("span", null, t.part + " " + part));
+        app.appendChild(divider);
+      }
       var card = el("section", "block" + (b.rest ? " rest" : ""));
       var head = el("div", "block-head");
       if (b.rest) {
@@ -223,7 +234,6 @@
         if (b.rs) meta.push(time(b.rs) + " " + t.off);
         if (b.tc) meta.push(t.cap + " " + time(b.tc));
         if (b.ra) meta.push(t.restAfter + " " + time(b.ra));
-        if (b.wait) meta.push(t.wait);
         if (meta.length) head.appendChild(el("span", "meta", meta.join(" · ")));
       }
       card.appendChild(head);
