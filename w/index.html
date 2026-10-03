@@ -235,9 +235,9 @@
         head.appendChild(el("span", "type", TYPES[b.t] || b.t || ""));
         var meta = [];
         if (b.t === "EMOM" && b.i && b.i !== 60) meta.push(t.every + " " + time(b.i));
-        // Rotating EMOM: one exercise per interval, in turn - "5 × 2" rounds through the list.
+        // Rotating EMOM: one exercise per interval, in turn - each one shows its slot (Min 1, Min 2).
         var rotating = b.t === "EMOM" && b.rot && (b.e || []).length > 1;
-        if (b.r) meta.push(rotating ? b.r + " × " + b.e.length : t.rounds(b.r));
+        if (b.r) meta.push(t.rounds(b.r));
         if (b.d && b.t !== "FOR_TIME") meta.push(time(b.d));
         if (b.w) meta.push(time(b.w) + " " + t.work);
         if (b.rs) meta.push(time(b.rs) + " " + t.off);
