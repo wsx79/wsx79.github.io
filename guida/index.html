@@ -62,6 +62,7 @@
   .hero h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.05; margin: 0 0 12px; font-weight: 900; }
   .hero h1 span { color: var(--orange); }
   .hero p.lead { color: var(--muted); font-size: 1.15rem; max-width: 720px; margin: 0 0 22px; }
+  .hero p.version { color: var(--muted); font-size: .9rem; margin: -10px 0 22px; }
   .cta { display: flex; flex-wrap: wrap; gap: 10px; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 800;
@@ -155,6 +156,7 @@
 <header class="hero" id="top">
   <h1 data-i="heroTitle"></h1>
   <p class="lead" data-i="heroLead"></p>
+  <p class="version" data-i="heroVersion"></p>
   <div class="cta">
     <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.ironwod.app" data-i="ctaPlay"></a>
     <a class="btn" href="#s-start" data-i="ctaStart"></a>
@@ -181,6 +183,8 @@ const UI = {
     en: 'Cross-training timers, interval WODs, whiteboard scanning, benchmarks, max lifts, analytics and a coach that reads your data. No account: your training stays on your phone.',
     es: 'Temporizadores de cross training, WOD por intervalos, escaneo de la pizarra, benchmarks, máximos, análisis y un coach que lee tus datos. Sin cuenta: tus entrenamientos se quedan en tu teléfono.'
   },
+  // the app version this guide describes: change it with every update of the guide
+  heroVersion: { it: 'Aggiornata per IRON WOD 10.3.0 · 9 ottobre 2026', en: 'Updated for IRON WOD 10.3.0 · 9 October 2026', es: 'Actualizada para IRON WOD 10.3.0 · 9 de octubre de 2026' },
   ctaPlay: { it: 'Scarica su Google Play', en: 'Get it on Google Play', es: 'Descárgala en Google Play' },
   ctaStart: { it: 'Inizia a leggere ↓', en: 'Start reading ↓', es: 'Empieza a leer ↓' },
   fAbout: { it: 'Informazioni', en: 'About', es: 'Información' },
