@@ -52,7 +52,7 @@
   <main>
     <a class="back" href="about.html">&larr; IRON WOD</a>
     <h1>Privacy Policy — IRON WOD</h1>
-    <p class="updated">Last updated: 1 October 2026</p>
+    <p class="updated">Last updated: 9 October 2026</p>
 
     <p>IRON WOD (the <strong>&ldquo;App&rdquo;</strong>) is an Android workout timer, workout log and training-analysis application.</p>
 
@@ -64,25 +64,36 @@
       <li>custom WODs and workout configuration;</li>
       <li>exercise catalogue data and user-created exercises;</li>
       <li>max lifts and performance records;</li>
-      <li>athlete/profile information entered by the user, including an optional profile picture chosen from the device's photos;</li>
+      <li>athlete/profile information entered by the user, including an optional profile picture chosen from the device's photos, training preferences, heart-rate zones and physical limitations (body areas to protect) used to adapt the suggested workouts;</li>
       <li>optional heart-rate data collected during a training session when a compatible Bluetooth heart-rate device is connected;</li>
       <li>Iron Coach, analytics, progress and training-related data derived from locally stored workout information;</li>
       <li>App settings such as language, measurement units, timer preferences, sound/voice options and equipment preferences.</li>
     </ul>
     <p>IRON WOD does not sell this training data and does not upload it to an IRON WOD developer server.</p>
+    <p>If the user adds IRON WOD's optional home-screen widget, it shows the active athlete's training days of the current week, their weekly target and their last session, read from this same local data. It is visible to anyone who can see the device's home screen; removing the widget stops it.</p>
 
     <h2>2. Optional Google Drive backup</h2>
-    <p>IRON WOD offers an optional cloud backup feature using the user's own Google account. When enabled by the user, the App uploads a single backup file (containing the same locally stored workout/training data described in Section 1) to a private, app-specific storage area of the user's Google Drive known as the <strong>App Data Folder</strong>.</p>
+    <p>IRON WOD offers an optional cloud backup feature using Google accounts chosen by the user. Each athlete profile in the App can be linked to its own Google account (for example each athlete to their own account, and the coach to theirs). When a backup is made, the App uploads a backup file to a private, app-specific storage area of that Google account's Drive known as the <strong>App Data Folder</strong>. An athlete's backup file contains only that athlete's data described in Section 1 (profile, sessions, custom WODs, max lifts, favourites and ratings), together with the exercise catalogue and the App settings; it does not contain other athletes' data. Backups made with earlier versions of the App, which contain every athlete, stay in the App Data Folder until the user deletes them.</p>
     <p>The App Data Folder is not visible in the user's regular Google Drive file list and cannot be accessed by any other app or by the developer - only IRON WOD, running on a device where the user has signed in, can read or write that file. IRON WOD only requests the minimal Google Drive scope needed for this (<code>drive.appdata</code>) and never requests access to the user's other Drive files.</p>
-    <p>This backup is used solely to let the user restore their own data (e.g. after reinstalling the App or on a new device). The developer does not access, view or process the contents of this backup. Users can disable this feature and revoke IRON WOD's Google Drive access at any time from their Google Account settings.</p>
+    <p>This backup is used solely to let the user restore their own data (e.g. after reinstalling the App or on a new device). Restoring an athlete's backup replaces only that athlete's data on the device. The developer does not access, view or process the contents of this backup. Users can unlink an account in the App, delete an athlete's backup from the App, and revoke IRON WOD's Google Drive access at any time from their Google Account settings.</p>
 
-    <h2>3. Bluetooth and heart-rate devices</h2>
+    <h2>3. Health Connect</h2>
+    <p>On Android devices with <strong>Health Connect</strong>, the user can choose to send finished training sessions to it (Settings &rsaquo; Data &rsaquo; Health). This is off by default and is turned on for one athlete profile, normally the phone's owner, after the user grants the permissions in Health Connect's own screen.</p>
+    <p>When enabled, IRON WOD <strong>writes</strong> to Health Connect only:</p>
+    <ul>
+      <li><strong>exercise sessions</strong> (permission <code>WRITE_EXERCISE</code>): start and end time, the workout name and the athlete's notes for the session;</li>
+      <li><strong>heart rate</strong> (permission <code>WRITE_HEART_RATE</code>): the heart-rate samples recorded during the session from a connected Bluetooth heart-rate device, when there are any.</li>
+    </ul>
+    <p>IRON WOD does <strong>not read</strong> any data from Health Connect and requests no read permission. What it writes is stored by Health Connect on the device and becomes available to the other apps the user allows in Health Connect, under the user's control and under the terms of those apps. When a session that was sent is edited or deleted in IRON WOD while the feature is on, the App updates or removes the corresponding Health Connect records. The user can turn the feature off in the App, revoke IRON WOD's permissions and delete the data from Health Connect's settings at any time.</p>
+    <p>The use of information received from Health Connect adheres to the Health Connect Permissions policy, including the Limited Use requirements. Health Connect data is never sent to an IRON WOD developer server, never sold and never used for advertising.</p>
+
+    <h2>4. Bluetooth and heart-rate devices</h2>
     <p>IRON WOD can optionally connect to compatible Bluetooth Low Energy (BLE) heart-rate devices.</p>
     <p>When this feature is used, the App may access nearby-device/Bluetooth functionality in order to discover and communicate with the selected device. Heart-rate samples used by IRON WOD are processed as part of the training session and stored locally where the relevant workout/session feature saves them.</p>
     <p>On older Android versions, Android may require location-related permission for Bluetooth device discovery even when IRON WOD is not using that permission to build a location history.</p>
     <p>The heart-rate feature is optional and the App can be used without connecting a Bluetooth device.</p>
 
-    <h2>4. Google Cast</h2>
+    <h2>5. Google Cast</h2>
     <p>IRON WOD includes optional Google Cast support so timers or workout information can be displayed on compatible Cast devices or televisions.</p>
     <p>When Cast is used, Google Play services / the Google Cast SDK may process device, network and Cast-interaction information required to discover, connect to and communicate with Cast devices. Google states that the Cast SDK may also collect anonymized Cast interaction and app-usage information for improving the Cast experience.</p>
     <p>IRON WOD uses a custom Cast web receiver to display the timer on a compatible TV or Cast device. The receiver is hosted publicly on GitHub Pages at:</p>
@@ -91,32 +102,32 @@
     <p>When Cast is active, the receiver may download these public assets over the Internet. This is limited to resources needed to display and announce the timer. It is <strong>not</strong> used to upload the user's workout history to GitHub or to an IRON WOD developer server.</p>
     <p>Users who do not want this network activity can simply avoid using the Cast feature.</p>
 
-    <h2>5. Camera, photos and WOD scanner (OCR)</h2>
+    <h2>6. Camera, photos and WOD scanner (OCR)</h2>
     <p>IRON WOD includes an optional feature that uses the device camera to scan a printed or handwritten WOD (workout) and convert it to text using on-device optical character recognition (OCR), powered by Google ML Kit Text Recognition. Instead of taking a photo, the user can pick an existing image (for example a screenshot of a box's workout) through the Android photo picker: the App receives only the image the user selects and needs no permission to read the photo library. The same photo picker is used for the optional profile picture.</p>
     <p>When this feature is used, the App accesses the camera only to capture the image being scanned. Image processing is performed on-device: camera frames used for text recognition are not uploaded to an IRON WOD developer server. The App only requests camera access when the user actively opens the WOD scanner feature, and the feature can be declined or ignored; IRON WOD can be used without ever granting camera permission.</p>
 
-    <h2>6. Translation features</h2>
+    <h2>7. Translation features</h2>
     <p>IRON WOD may use Google ML Kit on-device translation and language-identification technology for supported translation features, such as assisting with exercise text.</p>
     <p>ML Kit translation uses language models downloaded to the device when required. Network access may therefore be used to download or update those models. Translation is performed using the ML Kit on-device translation functionality.</p>
     <p>As described in Google's ML Kit terms, ML Kit may send Google technical information about its own operation (such as performance and usage metrics of the ML Kit features). The images, text and workouts processed by ML Kit stay on the device.</p>
 
-    <h2>7. Google Play services</h2>
+    <h2>8. Google Play services</h2>
     <p>IRON WOD uses Google Play-related components for features such as Google Cast, Google Sign-In / Drive backup, and the optional Google Play in-app review flow. Those Google components may process technical information according to Google's own terms and privacy policies.</p>
 
-    <h2>8. Sharing WODs (links and QR codes)</h2>
+    <h2>9. Sharing WODs (links and QR codes)</h2>
     <p>The user can share a WOD from the App as a link or a QR code. This only happens when the user chooses to: the App opens the Android share menu and the user picks the recipient app (for example WhatsApp or an email app), whose own terms and privacy policy then apply.</p>
     <p>The link contains the workout itself, encoded in the address: its name, notes, structure (parts, rounds, times) and exercises with their prescribed repetitions, distances, loads and notes. It does not contain results, session history, heart-rate data, profile information or anything else from the App.</p>
     <p>Links point to a public page hosted on GitHub Pages at <a href="https://wsx79.github.io/w/">https://wsx79.github.io/w/</a>. The workout is in the part of the address after the &ldquo;#&rdquo; sign, which browsers do not send to the server: GitHub only receives an ordinary request for the page (and for the list of exercise names it shows), processed under GitHub's own privacy statement. When the recipient opens the link in IRON WOD, the workout is shown in the editor and saved only on the recipient's device, if they choose to save it.</p>
     <p>Anyone who obtains a shared link or QR code can read the workout it contains.</p>
 
-    <h2>9. Support and database recovery</h2>
+    <h2>10. Support and database recovery</h2>
     <p>If the App cannot open its local database (for example after a failed update), it keeps a copy on the device and shows a recovery screen. From there the user may choose to send that copy, with a short technical error description, to the privacy contact below through an app of their choice, so the developer can diagnose the problem and help recover the data. Nothing is sent unless the user does this. The copy contains the App data described in Section 1; it is used only for that support request and deleted afterwards.</p>
     <p>Messages the user sends to the contact address are used only to answer them.</p>
 
-    <h2>10. Public web pages</h2>
+    <h2>11. Public web pages</h2>
     <p>The user guide (<a href="https://wsx79.github.io/guida/">https://wsx79.github.io/guida/</a>), this policy and the shared-WOD page are static pages hosted on GitHub Pages. They do not use cookies, analytics or advertising; the guide only remembers the chosen language in the browser's local storage. Opening them is subject to GitHub's own privacy statement.</p>
 
-    <h2>11. Permissions</h2>
+    <h2>12. Permissions</h2>
     <p>Depending on the Android version and features used, IRON WOD may request or declare permissions including:</p>
     <ul>
       <li><strong>Internet / network state</strong> — used by network-dependent components such as Google Cast, Google Drive backup, Google Play services and ML Kit model downloads;</li>
@@ -127,33 +138,34 @@
       <li><strong>Vibration</strong> — used for timer feedback;</li>
       <li><strong>Wake lock</strong> — used where necessary to support reliable timer/session behaviour while the device is active;</li>
       <li><strong>Notifications</strong> — used to announce achievements unlocked by the user's training;</li>
-      <li><strong>Foreground service</strong> — declared by the Google Cast SDK to keep an active Cast session running.</li>
+      <li><strong>Foreground service</strong> — declared by the Google Cast SDK to keep an active Cast session running;</li>
+      <li><strong>Health Connect (write exercise, write heart rate)</strong> — used only when the user turns on sending sessions to Health Connect (see Section 3); no Health Connect read permission is requested.</li>
     </ul>
     <p>Permissions are used only for the associated App functionality.</p>
 
-    <h2>12. Android backup and device transfer</h2>
+    <h2>13. Android backup and device transfer</h2>
     <p>Depending on the user's Android and Google backup settings, locally stored App data may be included in Android backup or device-transfer mechanisms. These services are controlled by the operating system and/or the user's Google/device settings, not by an IRON WOD developer server.</p>
 
-    <h2>13. Data sharing and sale</h2>
+    <h2>14. Data sharing and sale</h2>
     <p>IRON WOD does <strong>not sell</strong> users' personal or workout data.</p>
-    <p>The developer does not intentionally share users' locally stored workout history with advertisers or data brokers. Information may be processed by third-party platform/SDK providers only when required for the optional functionality described above, such as Google Cast, Google Drive backup, ML Kit model delivery or Google Play services.</p>
+    <p>The developer does not intentionally share users' locally stored workout history with advertisers or data brokers. Information may be processed by third-party platform/SDK providers only when required for the optional functionality described above, such as Google Cast, Google Drive backup, ML Kit model delivery or Google Play services. Sessions sent to Health Connect (Section 3) are shared only with the apps the user allows in Health Connect.</p>
     <p>Content the user chooses to share (shared WOD links and QR codes, session results, exports, a database copy sent for support) goes only to the recipients and apps the user picks.</p>
 
-    <h2>14. Data control and deletion</h2>
-    <p>Users can manage or delete workout/session data through the App where the relevant controls are available, including deleting their Google Drive backup by disabling the backup feature and removing IRON WOD's access from their Google Account.</p>
+    <h2>15. Data control and deletion</h2>
+    <p>Users can manage or delete workout/session data through the App where the relevant controls are available, including deleting an athlete's Google Drive backup from the App, unlinking a Google account and removing IRON WOD's access from their Google Account. Data sent to Health Connect can be deleted from Health Connect's own settings.</p>
     <p>Uninstalling IRON WOD removes the App's local data from the device, subject to copies that may remain in Android/Google/device backups controlled by the user or platform, including any Google Drive backup the user chose to create.</p>
     <p>If the App provides backup/export functionality, exported copies remain under the user's control and must be deleted separately if no longer wanted.</p>
 
-    <h2>15. Children's privacy</h2>
+    <h2>16. Children's privacy</h2>
     <p>IRON WOD is a fitness and training application intended for general athletes and is not specifically directed to children under 13.</p>
 
-    <h2>16. Security</h2>
+    <h2>17. Security</h2>
     <p>IRON WOD is designed so that core workout information remains on the user's device, or in the user's own Google Drive App Data Folder when backup is enabled, rather than being stored in an IRON WOD developer-operated cloud account. No method of electronic storage or device security is completely risk-free, and users should protect their device, Google account and any exported backup files appropriately.</p>
 
-    <h2>17. Changes to this Privacy Policy</h2>
+    <h2>18. Changes to this Privacy Policy</h2>
     <p>This Privacy Policy may be updated when App functionality, third-party SDKs or legal requirements change. The current version will show its latest revision date at the top of this document.</p>
 
-    <h2>18. Contact</h2>
+    <h2>19. Contact</h2>
     <p><strong>Developer:</strong> Fabio Serra<br>
     <strong>Privacy contact:</strong> <a href="mailto:ironwodapp@proton.me">ironwodapp@proton.me</a></p>
   </main>
