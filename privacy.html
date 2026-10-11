@@ -52,7 +52,7 @@
   <main>
     <a class="back" href="about.html">&larr; IRON WOD</a>
     <h1>Privacy Policy — IRON WOD</h1>
-    <p class="updated">Last updated: 10 October 2026</p>
+    <p class="updated">Last updated: 11 October 2026</p>
 
     <p>IRON WOD (the <strong>&ldquo;App&rdquo;</strong>) is an Android workout timer, workout log and training-analysis application.</p>
 
@@ -92,6 +92,12 @@
     <p>When this feature is used, the App may access nearby-device/Bluetooth functionality in order to discover and communicate with the selected device. Heart-rate samples used by IRON WOD are processed as part of the training session and stored locally where the relevant workout/session feature saves them.</p>
     <p>On older Android versions, Android may require location-related permission for Bluetooth device discovery even when IRON WOD is not using that permission to build a location history.</p>
     <p>The heart-rate feature is optional and the App can be used without connecting a Bluetooth device.</p>
+
+    <h3 id="watch">IRON WOD Remote for Amazfit watches (Zepp OS)</h3>
+    <p>IRON WOD Remote is an optional companion app for Amazfit watches, installed from the Zepp App Store. It shows the timer open in IRON WOD on the watch and lets the watch keys start, pause and resume it, count rounds, finish or cancel the WOD.</p>
+    <p>The watch talks to IRON WOD through the Zepp app on the same phone: while a timer is open, IRON WOD answers only on the phone's own internal address (127.0.0.1), which nothing outside the phone can reach. The timer board and the watch commands never leave the phone and the watch, and nothing is sent to an IRON WOD developer server.</p>
+    <p>If the user allows it, the watch reads its own heart-rate sensor while IRON WOD Remote is open. The value is shown on the watch and, when no Bluetooth heart-rate device is connected to IRON WOD, it is passed to IRON WOD on the phone, which uses it like the samples of a heart-rate device (shown on the timer and saved with the session, see above). Heart rate from a Bluetooth device connected to IRON WOD always comes first. Showing the heart rate, sounds and vibration can be turned off in the Zepp app (IRON WOD Remote settings); these settings are kept by the Zepp app and on the watch.</p>
+    <p>The Zepp app and the watch are provided by Zepp Health; their own handling of data is described in Zepp's privacy policy.</p>
 
     <h2>5. Google Cast</h2>
     <p>IRON WOD includes optional Google Cast support so timers or workout information can be displayed on compatible Cast devices or televisions.</p>
